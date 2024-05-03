@@ -9,6 +9,8 @@ from tensorflow.keras.layers import Embedding, LSTM, Dense
 from sklearn.model_selection import train_test_split
 
 from tensorflow.keras.callbacks import EarlyStopping
+from tensorflow.keras.callbacks import TensorBoard
+
 
 data = pd.read_csv('spam.csv')
 
@@ -49,11 +51,12 @@ model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy']
 # Splitting the data into training and testing
 X_train, X_test, y_train, y_test = train_test_split(X_padded, y, test_size=0.2, random_state=0)
 
-# Early Stopping
+# Callbacks
 early_stopping = EarlyStopping(monitor='val_loss', patience=2)
+tensorboard_callback = TensorBoard(log_dir='./logs', histogram_freq=1)
 
 # Model Training
-model.fit(X_train, y_train, epochs=10, batch_size=64, callbacks=[early_stopping], verbose=1)
+model.fit(X_train, y_train, epochs=10, batch_size=64, callbacks=[early_stopping, tensorboard_callback], verbose=1)
 
 # Model Evaluation
 loss, accuracy = model.evaluate(X_test, y_test)
