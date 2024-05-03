@@ -1,7 +1,7 @@
 import pandas as pd
 
 from nltk.stem import WordNetLemmatizer
-from keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Embedding, LSTM, Dense
@@ -19,7 +19,7 @@ data['v2'] = data['v2'].str.lower()
 data['v2'] = data['v2'].str.replace('[^a-zA-Z0-9]', '')
 
 lemmatizer = WordNetLemmatizer()
-data['text'] = data['text'].apply(lambda x: ' '.join([lemmatizer.lemmatize(word) for word in x.split()]))
+data['v2'] = data['v2'].apply(lambda x: ' '.join([lemmatizer.lemmatize(word) for word in x.split()]))
 
 X = data['v2']
 y = data['v1']
