@@ -12,7 +12,7 @@ from tensorflow.keras.callbacks import EarlyStopping
 from tensorflow.keras.callbacks import TensorBoard
 
 
-data = pd.read_csv('spam.csv')
+data = pd.read_csv('spam.csv', skiprows=1)
 
 # Data Preprocessing
 data['v2'] = data['v2'].str.lower()
@@ -35,7 +35,7 @@ X_padded = pad_sequences(X_sequences, maxlen=max_len, padding='post')
 # Model Building
 model = Sequential()
 
-model.add(Embedding(input_dim=5000, output_dim=128, input_length=max_len))
+model.add(Embedding(input_dim=5000, output_dim=128))
 model.add(LSTM(units=64))
 model.add(Dense(units=1, activation='sigmoid'))
 
