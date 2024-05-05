@@ -63,7 +63,7 @@ early_stopping = EarlyStopping(monitor='val_loss', patience=2)
 tensorboard_callback = TensorBoard(log_dir='./logs', histogram_freq=1)
 
 # Model Training
-model.fit(X_train, y_train, epochs=10, batch_size=64, callbacks=[early_stopping, tensorboard_callback], verbose=1)
+model.fit(X_train, y_train, epochs=100, batch_size=128, callbacks=[early_stopping, tensorboard_callback], verbose=1)
 
 # Model Evaluation
 loss, accuracy = model.evaluate(X_test, y_test)
